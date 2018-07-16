@@ -46,8 +46,21 @@
     $(window).on('load', function () {
       log(1, "window.load", "");
 
+      var edText = $('#edText');
+      edText.keypress(function (event) {
+        if (event.which === 13) {
+          var txt = edText.val();
+          log(1, 'send', txt);
+          ws.send(txt);
+
+          edText.val('');
+        }
+      });
+
       var lbState = $('#lbState');
       var setConnected = function (isConnected) {
+        edText.prop("disabled", !isConnected);
+
         lbState.attr('class', 'alert alert-' + (isConnected ? 'success' : 'danger'));
         lbState.text((isConnected ? '' : 'Not ') + 'Connected');
       };
@@ -76,6 +89,7 @@
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
+      <input id="edText" class="container"/>
     </div>
     <div class="panel-body">
       <pre id="txtLog" class="container border"></pre>
