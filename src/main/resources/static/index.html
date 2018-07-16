@@ -15,6 +15,29 @@
       console.log(level + "  " + context + "  " + message);
     };
 
+    var ws;
+    var reconnect = function (isConnectedCallback) {
+      if (ws && ws.close) {
+        ws.close();
+      }
+
+      ws = new WebSocket("ws://" + location.host + "/ws");
+      ws.onopen = function () {
+        log(1, "onopen", "Connection open");
+        isConnectedCallback(true);
+      };
+      ws.onerror = function () {
+        log(1, "onerror", "");
+      };
+      ws.onclose = function () {
+        log(1, "onclose", "");
+        isConnectedCallback(false);
+      };
+      ws.onmessage = function (event) {
+        log(1, "onmessage", event.data);
+      };
+    };
+
     $(window).on('load', function () {
       log(1, "window.load", "");
 
@@ -24,6 +47,10 @@
         lbState.text((isConnected ? '' : 'Not ') + 'Connected');
       };
       setConnected(false);
+
+      $('#btnReconnect').click(function () {
+        reconnect(setConnected);
+      });
     });
   </script>
 </head>
