@@ -11,8 +11,12 @@
   <script src="/webjars/bootstrap/4.1.1/js/bootstrap.min.js" type="application/javascript"></script>
 
   <script>
+    var log = function (level, context, message) {
+      console.log(level + "  " + context + "  " + message);
+    };
+
     $(window).on('load', function () {
-      console.log('Loaded');
+      log(1, "window.load", "");
     });
   </script>
 </head>
