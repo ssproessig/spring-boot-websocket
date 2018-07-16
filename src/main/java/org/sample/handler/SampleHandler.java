@@ -1,5 +1,6 @@
 package org.sample.handler;
 
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -18,4 +19,16 @@ public class SampleHandler extends TextWebSocketHandler {
     logger.info("Received text: {}", message.toString());
   }
 
+
+  @Override
+  public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    super.afterConnectionEstablished(session);
+    logger.info("New session: {}", session.toString());
+  }
+
+  @Override
+  public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    super.afterConnectionClosed(session, status);
+    logger.info("Session closed: {}  Status: {}", session.toString(), status);
+  }
 }
