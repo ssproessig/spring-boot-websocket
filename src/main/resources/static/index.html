@@ -12,7 +12,11 @@
 
   <script>
     var log = function (level, context, message) {
-      console.log(level + "  " + context + "  " + message);
+      if (!txtLog) {
+        txtLog = $('#txtLog');
+      }
+      var msg = (new Date().toISOString()) + "   " + level + "  " + context + "  " + message;
+      txtLog.append(msg + "\n");
     };
 
     var ws;
@@ -38,6 +42,7 @@
       };
     };
 
+    var txtLog;
     $(window).on('load', function () {
       log(1, "window.load", "");
 
@@ -61,9 +66,21 @@
 <div class="container">
   <button class="btn btn-outline-primary" id="btnReconnect">(Re)-Connect</button>
 </div>
+
 <h2>WebSocket Connection</h2>
 <div class="container">
   <span id="lbState" class="alert" role="alert"></span>
+</div>
+
+<h2>WebSocket data</h2>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+    </div>
+    <div class="panel-body">
+      <pre id="txtLog" class="container border"></pre>
+    </div>
+  </div>
 </div>
 
 </body>
