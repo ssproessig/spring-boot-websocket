@@ -1,0 +1,7 @@
+---
+applications:
+- name: websocket
+  memory: 256M
+  instances: 1
+  buildpack: java_buildpack
+  path: target/websocket-test-1.0-SNAPSHOT.jar
