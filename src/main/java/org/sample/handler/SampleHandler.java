@@ -1,5 +1,7 @@
 package org.sample.handler;
 
+import java.io.IOException;
+import java.lang.StringBuilder;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.TextMessage;
@@ -16,7 +18,16 @@ public class SampleHandler extends TextWebSocketHandler {
 
   @Override
   public void handleTextMessage(WebSocketSession session, TextMessage message) {
-    logger.info("Received text: {}", message.toString());
+    String payload = message.getPayload();
+    logger.info("Received text: {}", payload);
+
+    String reversed = (new StringBuilder(payload)).reverse().toString();
+
+    try {
+      session.sendMessage(new TextMessage(reversed));
+    } catch (IOException e) {
+      logger.error("Error sending reversed string: {}", e);
+    }
   }
 
 
