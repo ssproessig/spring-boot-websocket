@@ -17,6 +17,13 @@
 
     $(window).on('load', function () {
       log(1, "window.load", "");
+
+      var lbState = $('#lbState');
+      var setConnected = function (isConnected) {
+        lbState.attr('class', 'alert alert-' + (isConnected ? 'success' : 'danger'));
+        lbState.text((isConnected ? '' : 'Not ') + 'Connected');
+      };
+      setConnected(false);
     });
   </script>
 </head>
