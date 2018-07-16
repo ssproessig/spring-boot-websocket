@@ -15,7 +15,7 @@ public class SampleHandler extends TextWebSocketHandler {
 
   @Override
   public void handleTextMessage(WebSocketSession session, TextMessage message) {
-    logger.debug(message.toString());
+    logger.info("Received text: {}", message.toString());
   }
 
 }
