@@ -11,6 +11,7 @@ Get to know __WebSocket__ in the context of a __Spring Boot__ application.  Feat
 
 Not finished yet
 
+- [ ] check out: __Spring Boot Actuator__ integration
 - [ ] check out __OAuth2 integration__ at WebSocket level (test against _Cloud Foundry UAA_) 
 - [ ] bonus: use project __Lombok__ for creating data classes via annotations
 
